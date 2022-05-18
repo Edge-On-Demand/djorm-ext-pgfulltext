@@ -4,7 +4,7 @@ import six
 
 from django.db import models, connections
 from django.db.models.query import QuerySet
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 
 from djorm_pgfulltext.utils import adapt
 
@@ -311,7 +311,7 @@ class SearchQuerySet(QuerySet):
 
         if query:
             function = "to_tsquery" if raw else "plainto_tsquery"
-            ts_query = smart_text(
+            ts_query = smart_str(
                 "%s('%s', %s)" % (function, config, adapt(query))
             )
 
